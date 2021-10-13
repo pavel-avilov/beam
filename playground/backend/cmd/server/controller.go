@@ -103,9 +103,19 @@ func (controller *playgroundController) GetRunOutput(ctx context.Context, info *
 
 //GetCompileOutput is returning output of compilation for specific pipeline by PipelineUuid
 func (controller *playgroundController) GetCompileOutput(ctx context.Context, info *pb.GetCompileOutputRequest) (*pb.GetCompileOutputResponse, error) {
-	// TODO implement this method
-	compileOutput := pb.GetCompileOutputResponse{Output: "test compile output"}
-	return &compileOutput, nil
+	pipelineId := info.PipelineUuid
+	compileOutputInterface, err := cacheService.GetValue(uuid.MustParse(pipelineId), cache.SubKey_CompileOutput)
+	if err != nil {
+		grpclog.Error("GetCompileOutput: cache.GetValue: error: " + err.Error())
+		return nil, errors.NotFoundError("GetCompileOutput", "there is no compile output for pipelineId: "+pipelineId+", subKey: cache.SubKey_CompileOutput")
+	}
+	compileOutput, converted := compileOutputInterface.(string)
+	if !converted {
+		return nil, errors.InternalError("GetCompileOutput", "compile output can't be converted to string")
+	}
+	compileOutputResponse := pb.GetCompileOutputResponse{Output: compileOutput}
+
+	return &compileOutputResponse, nil
 }
 
 // runCode validates, compiles and runs code by pipelineId.
