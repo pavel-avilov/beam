@@ -34,7 +34,6 @@ import (
 	"path/filepath"
 	"reflect"
 	"testing"
-	"time"
 )
 
 const (
@@ -252,8 +251,6 @@ func Test_processCode(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	customAppEnvs := &environment.ApplicationEnvs{os.Getenv("APP_WORK_DIR"), &environment.CacheEnvs{"local", "address", time.Second * 100}, 0}
-
 	lc, _ := fs_tool.NewLifeCycle(pb.Sdk_SDK_JAVA, pipelineId, os.Getenv("APP_WORK_DIR"))
 	filePath := lc.GetAbsoluteExecutableFilePath()
 	workingDir := lc.GetAbsoluteExecutableFilesFolderPath()
@@ -290,7 +287,7 @@ func Test_processCode(t *testing.T) {
 			expectedRunOutput:     nil,
 			args: args{
 				ctx: context.Background(),
-				env: environment.NewEnvironment(*networkEnvs, *sdkEnv, *customAppEnvs),
+				env: environment.NewEnvironment(*networkEnvs, *sdkEnv, environment.ApplicationEnvs{}),
 				sdk: pb.Sdk_SDK_JAVA,
 			},
 		},
