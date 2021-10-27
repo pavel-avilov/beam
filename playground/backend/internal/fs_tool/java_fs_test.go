@@ -127,29 +127,6 @@ func Test_executableName(t *testing.T) {
 			want:    "",
 			wantErr: true,
 		},
-		{
-			name: "more than one element",
-			prepare: func() {
-				compiled := filepath.Join(workDir, javaBaseFileFolder, pipelineId.String(), javaCompiledFolderName)
-				filePath := filepath.Join(compiled, "temp1.class")
-				err := os.WriteFile(filePath, []byte("TEMP_DATA"), 0600)
-				if err != nil {
-					panic(err)
-				}
-
-				filePath = filepath.Join(compiled, "temp2.class")
-				err = os.WriteFile(filePath, []byte("TEMP_DATA"), 0600)
-				if err != nil {
-					panic(err)
-				}
-			},
-			args: args{
-				pipelineId: pipelineId,
-				workingDir: workDir,
-			},
-			want:    "",
-			wantErr: true,
-		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
