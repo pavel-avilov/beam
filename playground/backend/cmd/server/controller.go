@@ -283,7 +283,7 @@ func processCode(ctx context.Context, cacheService cache.Cache, lc *fs_tool.Life
 			processError(ctxWithTimeout, err.(error), data.([]byte), pipelineId, cacheService, pb.Status_STATUS_ERROR)
 			return
 		}
-		processSuccess(ctxWithTimeout, data.([]byte), pipelineId, cacheService)
+		processSuccess(ctxWithTimeout, data.([]byte), pipelineId, cacheService, pb.Status_STATUS_FINISHED)
 	}
 }
 
