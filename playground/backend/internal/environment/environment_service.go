@@ -84,7 +84,7 @@ func NewEnvironment(networkEnvs NetworkEnvs, beamEnvs BeamEnvs, appEnvs Applicat
 //	- cache expiration time: 15 minutes
 //	- type of cache: local
 //	- cache address: localhost:6379
-// If os environment variables doesn't contain value for app working dir - return error.
+// If os environment variables don't contain a value for app working dir - returns error.
 func GetApplicationEnvsFromOsEnvs() (*ApplicationEnvs, error) {
 	pipelineExecuteTimeout := defaultPipelineExecuteTimeout
 	cacheExpirationTime := defaultCacheKeyExpirationTime
@@ -132,7 +132,7 @@ func GetNetworkEnvsFromOsEnvs() (*NetworkEnvs, error) {
 
 // GetSdkEnvsFromOsEnvs returns BeamEnvs.
 // Lookups in os environment variables and takes value for Apache Beam SDK.
-// If os environment variables doesn't contain value for Apache Beam SDK - returns error.
+// If os environment variables don't contain a value for Apache Beam SDK - returns error.
 // Configures ExecutorConfig with config file.
 func GetSdkEnvsFromOsEnvs() (*BeamEnvs, error) {
 	sdk := pb.Sdk_SDK_UNSPECIFIED
@@ -200,7 +200,7 @@ func getConfigFromJson(configPath string) (*ExecutorConfig, error) {
 	return &executorConfig, err
 }
 
-// getEnv returns a environment variable or default value
+// getEnv returns an environment variable or default value
 func getEnv(key, defaultValue string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
