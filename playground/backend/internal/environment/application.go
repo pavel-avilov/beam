@@ -99,8 +99,8 @@ func (ae *ApplicationEnvs) WorkingDir() string {
 }
 
 // CacheEnvs returns cache environments
-func (ae *ApplicationEnvs) CacheEnvs() CacheEnvs {
-	return *ae.cacheEnvs
+func (ae *ApplicationEnvs) CacheEnvs() *CacheEnvs {
+	return ae.cacheEnvs
 }
 
 // PipelineExecuteTimeout returns timeout for code processing
