@@ -71,11 +71,11 @@ func setupEnvironment() (*environment.Environment, error) {
 	if err != nil {
 		return nil, err
 	}
-	beamEnvs, err := environment.GetSdkEnvsFromOsEnvs()
+	appEnvs, err := environment.GetApplicationEnvsFromOsEnvs()
 	if err != nil {
 		return nil, err
 	}
-	appEnvs, err := environment.GetApplicationEnvsFromOsEnvs()
+	beamEnvs, err := environment.GetSdkEnvsFromOsEnvs(appEnvs)
 	if err != nil {
 		return nil, err
 	}
