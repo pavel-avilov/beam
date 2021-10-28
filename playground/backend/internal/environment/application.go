@@ -41,7 +41,7 @@ type CacheEnvs struct {
 	// cacheType is type of cache (local/redis)
 	cacheType string
 
-	// address os where the cache is running
+	// address of where the cache is running
 	address string
 
 	// keyExpirationTime is expiration time for cache keys

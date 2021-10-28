@@ -55,7 +55,7 @@ const (
 )
 
 // Environment operates with environment structures: NetworkEnvs, BeamEnvs, ApplicationEnvs
-// It contains all environments variable which are used by the application
+// Environment contains all environment variables which are used by the application
 type Environment struct {
 	NetworkEnvs     NetworkEnvs
 	BeamSdkEnvs     BeamEnvs
@@ -80,10 +80,10 @@ func NewEnvironment(networkEnvs NetworkEnvs, beamEnvs BeamEnvs, appEnvs Applicat
 // GetApplicationEnvsFromOsEnvs returns ApplicationEnvs.
 // Lookups in os environment variables and tries to take values for all (exclude working dir) ApplicationEnvs parameters.
 // In case some value doesn't exist sets default values:
-// 	- pipeline execution timeout: 	10 minutes
-//	- cache expiration time: 		15 minutes
-//	- type of cache: 				local
-//	- cache address: 				localhost:6379
+// 	- pipeline execution timeout: 10 minutes
+//	- cache expiration time: 15 minutes
+//	- type of cache: local
+//	- cache address: localhost:6379
 // If os environment variables doesn't contain value for app working dir - return error.
 func GetApplicationEnvsFromOsEnvs() (*ApplicationEnvs, error) {
 	pipelineExecuteTimeout := defaultPipelineExecuteTimeout
@@ -132,8 +132,8 @@ func GetNetworkEnvsFromOsEnvs() (*NetworkEnvs, error) {
 
 // GetSdkEnvsFromOsEnvs returns BeamEnvs.
 // Lookups in os environment variables and takes value for Apache Beam SDK.
-// If os environment variables doesn't contain value for Apache Beam SDK - return error.
-// Configures ExecutorConfig by config file.
+// If os environment variables doesn't contain value for Apache Beam SDK - returns error.
+// Configures ExecutorConfig with config file.
 func GetSdkEnvsFromOsEnvs() (*BeamEnvs, error) {
 	sdk := pb.Sdk_SDK_UNSPECIFIED
 	if value, present := os.LookupEnv(beamSdkKey); present {
@@ -161,7 +161,7 @@ func GetSdkEnvsFromOsEnvs() (*BeamEnvs, error) {
 }
 
 // createExecutorConfig creates ExecutorConfig that corresponds to specific Apache Beam SDK.
-// Configures ExecutorConfig by config file which is located by configPath.
+// Configures ExecutorConfig with config file which is located at configPath.
 func createExecutorConfig(apacheBeamSdk pb.Sdk, configPath string) (*ExecutorConfig, error) {
 	executorConfig, err := getConfigFromJson(configPath)
 	if err != nil {
