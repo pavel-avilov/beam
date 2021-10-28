@@ -128,6 +128,7 @@ func Test_getSdkEnvsFromOsEnvs(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			os.Clearenv()
 			if err := setOsEnvs(tt.envsToSet); err != nil {
 				t.Fatalf("couldn't setup os env")
 			}
