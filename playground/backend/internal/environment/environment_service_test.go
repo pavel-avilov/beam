@@ -132,7 +132,7 @@ func Test_getSdkEnvsFromOsEnvs(t *testing.T) {
 			if err := setOsEnvs(tt.envsToSet); err != nil {
 				t.Fatalf("couldn't setup os env")
 			}
-			got, err := GetSdkEnvsFromOsEnvs(&ApplicationEnvs{workingDir: workingDir})
+			got, err := ConfigureBeamEnvs(workingDir)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("getSdkEnvsFromOsEnvs() error = %v, wantErr %v", err, tt.wantErr)
 				return

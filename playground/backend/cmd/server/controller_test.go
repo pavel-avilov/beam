@@ -83,7 +83,7 @@ func setup() *grpc.Server {
 	if err != nil {
 		panic(err)
 	}
-	sdkEnv, err := environment.GetSdkEnvsFromOsEnvs(appEnv)
+	sdkEnv, err := environment.ConfigureBeamEnvs(appEnv.WorkingDir())
 	if err != nil {
 		panic(err)
 	}
@@ -251,7 +251,7 @@ func Test_processCode(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	sdkEnv, err := environment.GetSdkEnvsFromOsEnvs(appEnvs)
+	sdkEnv, err := environment.ConfigureBeamEnvs(appEnvs.WorkingDir())
 	if err != nil {
 		panic(err)
 	}
